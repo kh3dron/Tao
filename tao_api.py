@@ -1,5 +1,6 @@
 import flask
 from flask import request, jsonify
+import random
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -24,5 +25,10 @@ def api_all():
 def api_id():
     id = int(request.args.get('id'))
     return(taos[id])
+
+
+@app.route('/api/rand', methods=["GET"])
+def api_rand():
+    return(random.choice(list(taos.values())))
 
 app.run()
